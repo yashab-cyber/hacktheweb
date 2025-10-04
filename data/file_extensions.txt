@@ -1,0 +1,37 @@
+# Common File Extensions for LFI/Path Traversal Testing
+# Helps identify what type of files to test for
+
+.php
+.asp
+.aspx
+.jsp
+.jspx
+.cgi
+.pl
+.py
+.rb
+.sh
+.bat
+.cmd
+.exe
+.dll
+.so
+.conf
+.config
+.cfg
+.ini
+.log
+.txt
+.xml
+.json
+.yml
+.yaml
+.env
+.bak
+.backup
+.old
+.tmp
+.temp
+.swp
+.inc
+.include

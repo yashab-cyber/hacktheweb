@@ -1,0 +1,115 @@
+# HackTheWeb Configuration File
+# This is a sample configuration file for HackTheWeb
+
+general:
+  # Number of concurrent threads
+  threads: 10
+  
+  # Request timeout in seconds
+  timeout: 30
+  
+  # Delay between requests (seconds) - 0 for no delay
+  delay: 0
+  
+  # User agent string
+  user_agent: 'HackTheWeb/1.0 (Automated Security Scanner)'
+  
+  # Follow HTTP redirects
+  follow_redirects: true
+  
+  # Verify SSL certificates
+  verify_ssl: false
+  
+  # Maximum retries for failed requests
+  max_retries: 3
+
+scanning:
+  # Maximum crawl depth
+  max_depth: 3
+  
+  # Maximum URLs to scan
+  max_urls: 1000
+  
+  # Scan mode: fast, smart, thorough
+  scan_mode: 'smart'
+  
+  # Vulnerability scanning techniques
+  techniques:
+    - xss
+    - sqli
+    - csrf
+    - ssrf
+    - xxe
+    - lfi
+    - rce
+    - idor
+
+ai:
+  # Enable learning from scan results
+  learning_enabled: true
+  
+  # Confidence threshold for vulnerability detection (0.0 - 1.0)
+  confidence_threshold: 0.7
+  
+  # Enable adaptive scanning strategies
+  adaptive_scanning: true
+  
+  # Smart payload selection based on target
+  smart_payload_selection: true
+  
+  # Pattern recognition for better detection
+  pattern_recognition: true
+
+recon:
+  # Enable subdomain enumeration
+  subdomain_enum: true
+  
+  # Enable port scanning
+  port_scan: true
+  
+  # Enable technology detection
+  tech_detection: true
+  
+  # Enable directory bruteforcing
+  directory_brute: true
+  
+  # Enable SSL/TLS analysis
+  ssl_analysis: true
+
+reporting:
+  # Default report format: html, json, pdf, markdown
+  format: 'html'
+  
+  # Severity levels to include
+  severity_levels:
+    - critical
+    - high
+    - medium
+    - low
+    - info
+  
+  # Include screenshots in reports
+  include_screenshots: false
+  
+  # Include payloads in reports
+  include_payloads: true
+
+proxy:
+  # Enable proxy usage
+  enabled: false
+  
+  # HTTP proxy
+  http: null
+  
+  # HTTPS proxy
+  https: null
+
+rate_limiting:
+  # Enable rate limiting
+  enabled: true
+  
+  # Maximum requests per second
+  requests_per_second: 10
+  
+  # Burst allowance
+  burst: 50

@@ -1,0 +1,29 @@
+# Sensitive File Paths (Linux/Unix)
+# Used by LFI, Path Traversal, and RCE scanners
+
+/etc/passwd
+/etc/shadow
+/etc/group
+/etc/hosts
+/etc/issue
+/etc/hostname
+/etc/motd
+/etc/mysql/my.cnf
+/etc/apache2/apache2.conf
+/etc/nginx/nginx.conf
+/etc/ssh/sshd_config
+/etc/ssl/private/
+/var/log/apache2/access.log
+/var/log/apache2/error.log
+/var/log/nginx/access.log
+/var/log/nginx/error.log
+/var/log/auth.log
+/var/log/syslog
+/var/www/html/index.php
+/var/www/html/.htaccess
+/root/.ssh/id_rsa
+/root/.ssh/authorized_keys
+/home/user/.ssh/id_rsa
+/proc/self/environ
+/proc/version
+/proc/cmdline

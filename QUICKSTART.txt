@@ -1,0 +1,64 @@
+# 🚀 Quick Start - HackTheWeb
+
+## Installation (30 seconds)
+
+```bash
+cd /workspaces/hacktheweb
+chmod +x scripts/install.sh
+./scripts/install.sh
+```
+
+## Run Your First Scan
+
+```bash
+# Using the launcher
+./hacktheweb.py scan http://testphp.vulnweb.com --scan-mode fast
+
+# Or using Python module
+python3 -m hacktheweb.cli scan http://testphp.vulnweb.com
+```
+
+## Common Commands
+
+```bash
+# List available techniques
+./hacktheweb.py list-techniques
+
+# Generate config file
+./hacktheweb.py init-config
+
+# Scan with specific techniques
+./hacktheweb.py scan http://example.com --techniques xss sqli
+
+# Generate different report formats
+./hacktheweb.py scan http://example.com --format html
+./hacktheweb.py scan http://example.com --format json
+./hacktheweb.py scan http://example.com --format pdf
+```
+
+## Examples
+
+```bash
+# Run demonstration
+PYTHONPATH=/workspaces/hacktheweb:$PYTHONPATH python3 examples/demo.py
+
+# View generated reports
+ls -lh reports/
+```
+
+## Help
+
+```bash
+./hacktheweb.py --help
+./hacktheweb.py scan --help
+```
+
+## Documentation
+
+- [README.md](README.md) - Full documentation
+- [QUICKSTART.md](docs/QUICKSTART.md) - Detailed guide
+- [PROJECT_SUMMARY.md](PROJECT_SUMMARY.md) - Project overview
+
+---
+
+**Ready to scan? Run:** `./hacktheweb.py scan --help`

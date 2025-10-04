@@ -1,0 +1,58 @@
+# Common API Endpoints
+# Used for API discovery and testing
+
+# REST API endpoints
+/api/users
+/api/user/{id}
+/api/users/{id}
+/api/accounts
+/api/account/{id}
+/api/auth
+/api/login
+/api/register
+/api/logout
+/api/profile
+/api/settings
+/api/admin
+/api/v1/
+/api/v2/
+/api/docs
+/api/swagger
+/api/openapi
+
+# GraphQL
+/graphql
+/graphql/console
+/graphiql
+
+# Admin panels
+/admin
+/administrator
+/wp-admin
+/admin.php
+/admin/login
+/administrator/
+/cpanel
+/controlpanel
+/dashboard
+/manage
+
+# Config files
+/.env
+/config.php
+/configuration.php
+/settings.php
+/database.php
+/.git/config
+/.svn/entries
+/web.config
+/application.properties
+/config.json
+
+# Backup files
+/backup.sql
+/backup.zip
+/db_backup.sql
+/database.sql
+/backup.tar.gz
+/site.zip

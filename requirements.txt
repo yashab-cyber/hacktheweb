@@ -1,0 +1,47 @@
+# Core Dependencies
+requests>=2.31.0
+urllib3>=2.0.0
+beautifulsoup4>=4.12.0
+lxml>=4.9.0
+aiohttp>=3.9.0
+asyncio>=3.4.3
+
+# Web Framework
+flask>=3.0.0
+flask-cors>=4.0.0
+gunicorn>=21.2.0
+
+# Network & Security
+dnspython>=2.4.0
+python-nmap>=0.7.1
+scapy>=2.5.0
+cryptography>=41.0.0
+pyOpenSSL>=23.0.0
+
+# Data Processing
+pyyaml>=6.0.0
+jinja2>=3.1.0
+pandas>=2.0.0
+numpy>=1.24.0
+
+# Reporting
+reportlab>=4.0.0
+matplotlib>=3.7.0
+plotly>=5.17.0
+markdown>=3.5.0
+
+# CLI & UI
+click>=8.1.0
+colorama>=0.4.6
+termcolor>=2.3.0
+rich>=13.0.0
+tqdm>=4.66.0
+
+# Database
+sqlalchemy>=2.0.0
+redis>=5.0.0
+
+# Utilities
+python-dateutil>=2.8.0
+validators>=0.22.0
+fake-useragent>=1.4.0

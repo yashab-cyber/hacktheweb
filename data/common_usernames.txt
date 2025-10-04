@@ -1,0 +1,25 @@
+# Common Usernames for Authentication Testing
+# Used by IDOR, NoSQLi, LDAPi, and other scanners
+
+admin
+administrator
+root
+user
+test
+guest
+demo
+system
+operator
+backup
+webmaster
+webadmin
+sysadmin
+netadmin
+support
+help
+info
+contact
+default
+manager
+supervisor
+moderator

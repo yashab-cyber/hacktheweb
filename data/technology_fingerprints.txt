@@ -1,0 +1,54 @@
+# Technology Fingerprints
+# Used by AI engine for technology detection
+
+# Web Servers
+nginx:nginx
+apache:Apache
+iis:Microsoft-IIS
+tomcat:Tomcat
+jetty:Jetty
+lighttpd:lighttpd
+
+# Programming Languages
+php:PHP
+asp:ASP.NET
+jsp:JSP
+python:Python
+ruby:Ruby
+nodejs:Node.js
+perl:Perl
+
+# Frameworks
+django:Django
+flask:Flask
+rails:Ruby on Rails
+laravel:Laravel
+symfony:Symfony
+spring:Spring
+express:Express
+nextjs:Next.js
+react:React
+angular:Angular
+vue:Vue.js
+
+# Databases
+mysql:MySQL
+postgresql:PostgreSQL
+mssql:Microsoft SQL Server
+mongodb:MongoDB
+redis:Redis
+oracle:Oracle
+mariadb:MariaDB
+
+# CMS
+wordpress:WordPress
+joomla:Joomla
+drupal:Drupal
+magento:Magento
+shopify:Shopify
+
+# Headers to check
+X-Powered-By:
+Server:
+X-AspNet-Version:
+X-Generator:
