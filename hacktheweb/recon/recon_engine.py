@@ -2,7 +2,6 @@
 Reconnaissance Module - Information Gathering
 """
 
-import asyncio
 import socket
 import ssl
 from typing import Dict, List, Any
@@ -66,28 +65,28 @@ class ReconEngine:
             try:
                 answers = resolver.resolve(domain, 'A')
                 dns_info['a_records'] = [str(rdata) for rdata in answers]
-            except:
+            except Exception:
                 pass
             
             # MX records
             try:
                 answers = resolver.resolve(domain, 'MX')
                 dns_info['mx_records'] = [str(rdata.exchange) for rdata in answers]
-            except:
+            except Exception:
                 pass
             
             # NS records
             try:
                 answers = resolver.resolve(domain, 'NS')
                 dns_info['ns_records'] = [str(rdata) for rdata in answers]
-            except:
+            except Exception:
                 pass
             
             # TXT records
             try:
                 answers = resolver.resolve(domain, 'TXT')
                 dns_info['txt_records'] = [str(rdata) for rdata in answers]
-            except:
+            except Exception:
                 pass
                 
         except Exception as e:
@@ -146,7 +145,7 @@ class ReconEngine:
                     
                     sock.close()
                     
-                except:
+                except Exception:
                     continue
                     
         except Exception as e:

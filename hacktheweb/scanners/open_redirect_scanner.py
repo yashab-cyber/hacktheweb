@@ -3,7 +3,6 @@ Open Redirect Scanner
 Detects URL redirection and header injection vulnerabilities
 """
 
-import asyncio
 import re
 from typing import List, Dict, Any
 from urllib.parse import urljoin, urlparse, parse_qs, urlencode, urlunparse

@@ -2,8 +2,6 @@
 SSRF (Server-Side Request Forgery) Scanner
 """
 
-import asyncio
-import re
 from typing import List, Dict, Any
 from urllib.parse import urlencode, urlparse, parse_qs
 
@@ -79,7 +77,6 @@ class SSRFScanner:
         # Look for URL-related input fields
         for input_field in form.get('inputs', []):
             input_name = input_field.get('name', '').lower()
-            input_type = input_field.get('type', 'text').lower()
             
             # Check if field might accept URLs
             url_indicators = ['url', 'link', 'uri', 'redirect', 'fetch', 'download', 'proxy', 'image', 'img']
@@ -130,7 +127,7 @@ class SSRFScanner:
                         })
                         break
                 
-                except Exception as e:
+                except Exception:
                     continue
         
         return vulnerabilities
@@ -185,7 +182,7 @@ class SSRFScanner:
                     })
                     break
             
-            except Exception as e:
+            except Exception:
                 continue
         
         return vulnerabilities

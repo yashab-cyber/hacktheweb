@@ -4,14 +4,13 @@ Core Scanner Module - Orchestrates all scanning activities
 
 import asyncio
 import aiohttp
-import requests
-from typing import Dict, List, Any, Optional
+from typing import Dict, List, Any
 from urllib.parse import urljoin, urlparse
 from bs4 import BeautifulSoup
 from datetime import datetime
 import time
-from concurrent.futures import ThreadPoolExecutor, as_completed
 from fake_useragent import UserAgent
+from hacktheweb.recon import ReconEngine
 
 
 class Scanner:
@@ -108,6 +107,11 @@ class Scanner:
         }
         
         try:
+            # Gather DNS, SSL, Ports, etc. using ReconEngine
+            recon_engine = ReconEngine(self.config, self.session)
+            recon_details = await recon_engine.gather_info(target)
+            recon_data.update(recon_details)
+            
             # Fetch initial page
             async with self.session.get(target) as response:
                 recon_data['status_code'] = response.status
@@ -214,24 +218,95 @@ class Scanner:
             'ssti': SSTIScanner(self.config, self.session),
         }
         
-        # Run priority scans
-        for vuln_info in priority_vulns[:5]:  # Top 5 priority
-            vuln_type = vuln_info['type']
+        # Determine allowed scanner keys based on configured techniques
+        configured_techniques = self.config.get('scanning.techniques', [])
+        allowed_scanner_keys = set()
+        
+        # Map techniques to scanner keys
+        tech_to_scanner = {
+            'xss': ['xss'],
+            'sqli': ['sqli'],
+            'csrf': ['csrf'],
+            'ssrf': ['ssrf'],
+            'lfi': ['lfi'],
+            'rfi': ['lfi'],
+            'xxe': ['xxe'],
+            'rce': ['rce'],
+            'idor': ['idor'],
+            'open_redirect': ['open_redirect'],
+            'cors': ['cors'],
+            'path_traversal': ['path_traversal'],
+            'nosqli': ['nosqli'],
+            'ldapi': ['ldapi'],
+            'ssti': ['ssti'],
+            'security_headers': ['security_headers'],
+        }
+        
+        for tech in configured_techniques:
+            tech_lower = tech.lower()
+            if tech_lower in tech_to_scanner:
+                allowed_scanner_keys.update(tech_to_scanner[tech_lower])
+        
+        # Determine scanners to run based on mode and explicit request
+        scan_mode = self.config.get('scanning.scan_mode', 'smart')
+        is_explicit = self.config.get('scanning.techniques_explicit', False)
+        
+        scanners_to_run = []
+        
+        if is_explicit or scan_mode == 'thorough':
+            # Run all allowed scanners
+            scanners_to_run = [k for k in scanners.keys() if k in allowed_scanner_keys]
+        else:
+            # Filter/Prioritize based on mode
+            passive_scanners = {'security_headers', 'cors'}
             
+            # 1. Start with passive / fast scanners if allowed
+            active_passives = [k for k in passive_scanners if k in allowed_scanner_keys]
+            scanners_to_run.extend(active_passives)
+            
+            # 2. Get prioritized scanners
+            prioritized_keys = []
+            for vuln_info in priority_vulns:
+                vuln_type = vuln_info['type'].lower()
+                if vuln_type in allowed_scanner_keys and vuln_type not in scanners_to_run:
+                    prioritized_keys.append(vuln_type)
+            
+            if scan_mode == 'fast':
+                # Run top 3 prioritized scanners
+                scanners_to_run.extend(prioritized_keys[:3])
+                # If prioritized is empty, fall back to a default fast set of active scanners
+                if not prioritized_keys:
+                    default_fast = ['xss', 'csrf']
+                    for k in default_fast:
+                        if k in allowed_scanner_keys and k not in scanners_to_run:
+                            scanners_to_run.append(k)
+            else:  # smart
+                # Run top 5 prioritized scanners
+                scanners_to_run.extend(prioritized_keys[:5])
+                # If prioritized is empty, fall back to a default smart set of active scanners
+                if not prioritized_keys:
+                    default_smart = ['xss', 'sqli', 'csrf', 'ssrf', 'lfi', 'open_redirect']
+                    for k in default_smart:
+                        if k in allowed_scanner_keys and k not in scanners_to_run:
+                            scanners_to_run.append(k)
+                            
+        # Print strategy summary using strategy to silence the ruff warning
+        mode_label = strategy.get('mode', scan_mode)
+        print(f"[*] AI Scan Strategy ({mode_label}): running {len(scanners_to_run)} scanners: {', '.join(scanners_to_run)}")
+        
+        # Run selected scanners
+        for vuln_type in scanners_to_run:
             if vuln_type in scanners:
                 print(f"[*] Scanning for {vuln_type.upper()}...")
-                
                 try:
                     scanner_results = await scanners[vuln_type].scan(
                         target,
                         self.results['recon_data']
                     )
-                    
                     vulnerabilities.extend(scanner_results)
-                    
                 except Exception as e:
                     print(f"[!] Error scanning {vuln_type}: {e}")
-        
+                    
         return vulnerabilities
     
     def _calculate_statistics(self) -> Dict[str, Any]:
@@ -306,7 +381,7 @@ class HTTPClient:
             try:
                 response = await method(url, **kwargs)
                 return response
-            except Exception as e:
+            except Exception:
                 if attempt == max_retries - 1:
                     raise
                 await asyncio.sleep(2 ** attempt)  # Exponential backoff

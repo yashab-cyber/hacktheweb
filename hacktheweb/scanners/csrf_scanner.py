@@ -2,10 +2,7 @@
 CSRF (Cross-Site Request Forgery) Scanner
 """
 
-import asyncio
-import re
 from typing import List, Dict, Any
-from bs4 import BeautifulSoup
 
 
 class CSRFScanner:
@@ -54,7 +51,6 @@ class CSRFScanner:
         
         for input_field in form.get('inputs', []):
             input_name = input_field.get('name', '').lower()
-            input_type = input_field.get('type', '').lower()
             
             # Check if this is a CSRF token field
             for pattern in token_patterns:

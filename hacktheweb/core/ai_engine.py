@@ -4,8 +4,7 @@ AI Engine - Rule-based intelligent decision making system
 
 import re
 import hashlib
-import json
-from typing import Dict, List, Any, Tuple
+from typing import Dict, List, Any
 from collections import defaultdict
 from datetime import datetime
 
@@ -94,7 +93,6 @@ class AIEngine:
         
         for header, value in headers.items():
             header_lower = header.lower()
-            value_lower = value.lower()
             
             # Check server signatures
             if header_lower == 'server':

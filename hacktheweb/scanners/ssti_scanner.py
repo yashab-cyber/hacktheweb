@@ -3,7 +3,6 @@ SSTI (Server-Side Template Injection) Scanner
 Detects template injection vulnerabilities in various template engines
 """
 
-import asyncio
 import re
 from typing import List, Dict, Any
 from urllib.parse import urljoin, urlparse, parse_qs, urlencode, urlunparse
@@ -185,7 +184,7 @@ class SSTIScanner:
                     engine = 'freemarker'
                 elif '<%=' in payload:
                     engine = 'erb'
-                elif '{' in payload and not '{{' in payload:
+                elif '{' in payload and '{{' not in payload:
                     engine = 'smarty'
                 
                 self.vulnerabilities.append({
@@ -197,7 +196,7 @@ class SSTIScanner:
                     'payload': payload,
                     'template_engine': engine,
                     'evidence': evidence,
-                    'description': f'Server-Side Template Injection vulnerability in URL parameter',
+                    'description': 'Server-Side Template Injection vulnerability in URL parameter',
                     'remediation': 'Never use user input directly in templates. Use sandboxed engines and strict validation.',
                     'cwe': 'CWE-1336',
                     'owasp': 'A03:2021 - Injection',

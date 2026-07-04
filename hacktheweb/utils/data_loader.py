@@ -3,8 +3,7 @@ Data Loader Utility
 Loads payloads, wordlists, and other data files for scanners
 """
 
-import os
-from typing import List, Dict, Any
+from typing import List, Dict
 from pathlib import Path
 
 

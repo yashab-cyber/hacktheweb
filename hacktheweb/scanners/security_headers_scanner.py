@@ -3,7 +3,6 @@ Security Headers Scanner
 Checks for missing or misconfigured security headers
 """
 
-import asyncio
 from typing import List, Dict, Any
 
 
@@ -128,7 +127,7 @@ class SecurityHeadersScanner:
                 max_age = int(max_age_str.strip())
                 if max_age < 31536000:  # Less than 1 year
                     return f'max-age too low ({max_age} seconds, recommend 31536000)'
-            except:
+            except Exception:
                 pass
         
         elif header_name == 'X-Frame-Options':

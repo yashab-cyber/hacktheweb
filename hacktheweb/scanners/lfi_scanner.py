@@ -2,8 +2,6 @@
 LFI (Local File Inclusion) Scanner
 """
 
-import asyncio
-import re
 from typing import List, Dict, Any
 from urllib.parse import urlencode, urlparse, parse_qs
 from ..utils.data_loader import data_loader
@@ -177,7 +175,7 @@ class LFIScanner:
                         })
                         break
                 
-                except Exception as e:
+                except Exception:
                     continue
         
         return vulnerabilities
@@ -232,7 +230,7 @@ class LFIScanner:
                     })
                     break
             
-            except Exception as e:
+            except Exception:
                 continue
         
         return vulnerabilities

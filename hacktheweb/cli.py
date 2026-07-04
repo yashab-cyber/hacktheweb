@@ -9,10 +9,7 @@ import asyncio
 import click
 from rich.console import Console
 from rich.table import Table
-from rich.progress import Progress, SpinnerColumn, TextColumn
 from rich.panel import Panel
-from rich import print as rprint
-from pathlib import Path
 
 from hacktheweb.core.config import Config
 from hacktheweb.core.ai_engine import AIEngine
@@ -44,7 +41,7 @@ def cli():
 @click.option('--threads', '-t', type=int, default=10, help='Number of threads')
 @click.option('--delay', '-d', type=float, default=0, help='Delay between requests (seconds)')
 @click.option('--techniques', multiple=True, 
-              type=click.Choice(['xss', 'sqli', 'csrf', 'ssrf', 'lfi', 'rfi', 'xxe', 'rce']),
+              type=click.Choice(['xss', 'sqli', 'csrf', 'ssrf', 'lfi', 'rfi', 'xxe', 'rce', 'idor', 'open_redirect', 'cors', 'path_traversal', 'nosqli', 'ldapi', 'ssti', 'security_headers']),
               help='Specific techniques to use')
 def scan(target, config, output, format, scan_mode, threads, delay, techniques):
     """
@@ -73,6 +70,7 @@ def scan(target, config, output, format, scan_mode, threads, delay, techniques):
         cfg.set('general.delay', delay)
     if techniques:
         cfg.set('scanning.techniques', list(techniques))
+        cfg.set('scanning.techniques_explicit', True)
     
     # Initialize components
     ai_engine = AIEngine(cfg)

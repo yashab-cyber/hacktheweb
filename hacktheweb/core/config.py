@@ -2,7 +2,6 @@
 Configuration Management for HackTheWeb
 """
 
-import os
 import yaml
 from typing import Dict, Any, List
 from pathlib import Path
@@ -32,7 +31,7 @@ class Config:
                 'max_depth': 3,
                 'max_urls': 1000,
                 'scan_mode': 'smart',  # smart, fast, thorough
-                'techniques': ['xss', 'sqli', 'csrf', 'ssrf', 'xxe', 'lfi', 'rce', 'idor'],
+                'techniques': ['xss', 'sqli', 'csrf', 'ssrf', 'xxe', 'lfi', 'rce', 'idor', 'open_redirect', 'cors', 'path_traversal', 'nosqli', 'ldapi', 'ssti', 'security_headers'],
             },
             'ai': {
                 'learning_enabled': True,

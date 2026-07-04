@@ -3,9 +3,7 @@ CORS (Cross-Origin Resource Sharing) Scanner
 Detects CORS misconfigurations and security issues
 """
 
-import asyncio
 from typing import List, Dict, Any
-from urllib.parse import urlparse
 
 
 class CORSScanner:
@@ -125,7 +123,7 @@ class CORSScanner:
                         'type': 'cors',
                         'severity': 'low',
                         'url': url,
-                        'evidence': f'Access-Control-Allow-Origin: *',
+                        'evidence': 'Access-Control-Allow-Origin: *',
                         'description': 'CORS misconfiguration - Wildcard origin allows any domain to access resource',
                         'remediation': 'Consider using specific origins if the resource contains sensitive data.',
                         'cwe': 'CWE-942',
@@ -152,7 +150,6 @@ class CORSScanner:
                 acao = response.headers.get('Access-Control-Allow-Origin', '')
                 acam = response.headers.get('Access-Control-Allow-Methods', '')
                 acah = response.headers.get('Access-Control-Allow-Headers', '')
-                acac = response.headers.get('Access-Control-Allow-Credentials', '')
                 
                 # Check if dangerous methods are allowed
                 dangerous_methods = ['PUT', 'DELETE', 'PATCH']

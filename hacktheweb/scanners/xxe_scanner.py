@@ -3,9 +3,8 @@ XXE (XML External Entity) Scanner
 Tests for XML External Entity injection vulnerabilities
 """
 
-import asyncio
 from typing import List, Dict, Any
-from urllib.parse import urlencode, urlparse, parse_qs
+from urllib.parse import urlencode, urlparse
 
 
 class XXEScanner:
@@ -96,7 +95,7 @@ class XXEScanner:
             async with self.session.post(target, data=test_xml, headers=headers) as response:
                 # If server accepts it without error, it might process XML
                 return response.status in [200, 201, 202, 400, 500]
-        except:
+        except Exception:
             return False
     
     async def _scan_direct(self, target: str) -> List[Dict[str, Any]]:
@@ -131,7 +130,7 @@ class XXEScanner:
                         })
                         break
             
-            except Exception as e:
+            except Exception:
                 continue
         
         return vulnerabilities
@@ -207,7 +206,7 @@ class XXEScanner:
                     })
                     break
             
-            except Exception as e:
+            except Exception:
                 continue
         
         return vulnerabilities
@@ -253,7 +252,7 @@ class XXEScanner:
                     })
                     break
             
-            except Exception as e:
+            except Exception:
                 continue
         
         return vulnerabilities

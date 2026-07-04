@@ -3,11 +3,9 @@ Report Generator - Creates comprehensive security reports
 """
 
 import json
-import os
 from datetime import datetime
-from typing import Dict, List, Any
+from typing import Dict, Any
 from pathlib import Path
-import markdown
 
 
 class ReportGenerator:
@@ -73,7 +71,7 @@ class ReportGenerator:
     def _generate_pdf(self, results: Dict[str, Any]) -> str:
         """Generate PDF report"""
         try:
-            from reportlab.lib.pagesizes import letter, A4
+            from reportlab.lib.pagesizes import letter
             from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, Table, TableStyle
             from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
             from reportlab.lib.units import inch

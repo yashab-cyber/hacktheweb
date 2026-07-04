@@ -3,7 +3,6 @@ IDOR (Insecure Direct Object Reference) Scanner
 Detects access control vulnerabilities and unauthorized access
 """
 
-import asyncio
 import re
 from typing import List, Dict, Any
 from urllib.parse import urljoin, urlparse, parse_qs, urlencode, urlunparse

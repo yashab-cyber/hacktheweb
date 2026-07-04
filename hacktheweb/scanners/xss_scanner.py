@@ -2,7 +2,6 @@
 XSS (Cross-Site Scripting) Scanner
 """
 
-import asyncio
 import re
 from typing import List, Dict, Any
 from urllib.parse import urlencode, urlparse, parse_qs
