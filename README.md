@@ -69,6 +69,12 @@
 - **Remediation Guidance** - Actionable fix recommendations
 - **Beautiful Visualizations** - Charts and statistics
 
+### 📊 Enterprise Logging & Fingerprinting
+
+- **Structured JSON Logging** - Native JSON logs optimized for Splunk, ELK, and other SIEM log collectors.
+- **Audit Trails** - Secure trace logging of scanner phases, resolving domains, and vulnerabilities detected for operational security auditing.
+- **Dynamic Technology Fingerprinting** - Heuristic fingerprinting mapping response headers, framework cookies (like `PHPSESSID`, `JSESSIONID`, `laravel_session`), and DOM patterns (such as React and Angular markers).
+
 ---
 
 ## 📦 Installation
@@ -392,10 +398,14 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 👥 Authors
 
-**YashAB Cyber Security**
+**YashAB Cyber Security (Yashab Alam)**
 
 - GitHub: [@yashab-cyber](https://github.com/yashab-cyber)
 - Website: [hacktheweb.io](https://hacktheweb.io)
+- Instagram: [@yashabcyber](https://www.instagram.com/yashabcyber)
+- X (formerly Twitter): [@Yashab_cyber](https://x.com/Yashab_cyber)
+- LinkedIn: [Yashab Alam](https://www.linkedin.com/in/yashab-alam)
+- Threads: [@yashabcyber](https://www.threads.net/@yashabcyber)
 
 ---
 
@@ -407,11 +417,14 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ---
 
-## 📞 Support
+## 📞 Support & Inquiries
 
-- **Issues:** [GitHub Issues](https://github.com/yashab-cyber/hacktheweb/issues)
-- **Discussions:** [GitHub Discussions](https://github.com/yashab-cyber/hacktheweb/discussions)
-- **Email:** support@hacktheweb.io
+For support, feedback, or custom inquiries:
+- **GitHub Issues:** [Issues](https://github.com/yashab-cyber/hacktheweb/issues)
+- **GitHub Discussions:** [Discussions](https://github.com/yashab-cyber/hacktheweb/discussions)
+- **Primary Email:** [yashabalam9@gmail.com](mailto:yashabalam9@gmail.com)
+- **Secondary Email:** [yashabalam707@gmail.com](mailto:yashabalam707@gmail.com)
+- **Donation Enquiries:** Please see [DONATE.md](DONATE.md) for more details.
 
 ---
 
