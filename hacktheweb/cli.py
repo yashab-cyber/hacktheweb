@@ -73,6 +73,9 @@ def scan(target, config, output, format, scan_mode, threads, delay, techniques):
         cfg.set('scanning.techniques_explicit', True)
     
     # Initialize components
+    from hacktheweb.utils import EnterpriseLogger
+    EnterpriseLogger.setup(cfg)
+    
     ai_engine = AIEngine(cfg)
     scanner = Scanner(cfg, ai_engine)
     

@@ -109,6 +109,9 @@ async def test_scanner_scan_execution():
     config.set('scanning.techniques', ['security_headers', 'xss'])
     config.set('scanning.techniques_explicit', True)
 
+    from hacktheweb.utils import EnterpriseLogger
+    EnterpriseLogger.setup(config)
+
     ai_engine = AIEngine(config)
     scanner = Scanner(config, ai_engine)
 

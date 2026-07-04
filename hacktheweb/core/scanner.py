@@ -29,12 +29,14 @@ class Scanner:
             'recon_data': {},
             'statistics': {},
         }
-        
     async def scan(self, target: str, scan_type: str = 'full') -> Dict[str, Any]:
         """
         Main scan orchestration
         """
-        print(f"[*] Starting scan on {target}")
+        from hacktheweb.utils import EnterpriseLogger
+        EnterpriseLogger.log('info', f"Starting scan on target: {target}")
+        EnterpriseLogger.audit('scan_start', target, 'initiated')
+        
         self.results['target'] = target
         self.results['start_time'] = datetime.now().isoformat()
         
@@ -43,25 +45,44 @@ class Scanner:
         
         try:
             # Phase 1: Initial reconnaissance
-            print("[*] Phase 1: Reconnaissance")
+            EnterpriseLogger.log('info', "Entering Phase 1: Reconnaissance")
+            EnterpriseLogger.audit('reconnaissance_start', target, 'running')
             recon_data = await self._reconnaissance_phase(target)
             self.results['recon_data'] = recon_data
+            EnterpriseLogger.audit('reconnaissance_complete', target, 'success', {
+                'domains_resolved': len(recon_data.get('dns', {}).get('a_records', [])),
+                'open_ports': len(recon_data.get('ports', []))
+            })
             
             # Phase 2: AI Analysis
-            print("[*] Phase 2: AI Analysis")
+            EnterpriseLogger.log('info', "Entering Phase 2: AI Analysis")
+            EnterpriseLogger.audit('ai_analysis_start', target, 'running')
             analysis = self.ai_engine.analyze_target(recon_data)
+            EnterpriseLogger.audit('ai_analysis_complete', target, 'success', {
+                'priority_vulnerability_classes': [v['type'] for v in analysis.get('priority_vulnerabilities', [])]
+            })
             
             # Phase 3: Vulnerability Scanning
-            print("[*] Phase 3: Vulnerability Scanning")
+            EnterpriseLogger.log('info', "Entering Phase 3: Vulnerability Scanning")
+            EnterpriseLogger.audit('scanning_start', target, 'running')
             vulnerabilities = await self._scanning_phase(target, analysis)
             self.results['vulnerabilities'] = vulnerabilities
+            EnterpriseLogger.audit('scanning_complete', target, 'success', {
+                'vulnerabilities_identified_count': len(vulnerabilities)
+            })
             
             # Phase 4: Statistics
             self.results['statistics'] = self._calculate_statistics()
+            EnterpriseLogger.log('info', "Scan finished successfully")
             
+        except Exception as err:
+            EnterpriseLogger.log('error', f"Critical failure during scan execution: {err}")
+            EnterpriseLogger.audit('scan_failure', target, 'error', {'error_message': str(err)})
+            raise
         finally:
             await self._close_session()
             self.results['end_time'] = datetime.now().isoformat()
+            EnterpriseLogger.audit('scan_end', target, 'completed')
         
         return self.results
     

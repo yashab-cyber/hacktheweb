@@ -63,6 +63,12 @@ class Config:
                 'requests_per_second': 10,
                 'burst': 50,
             },
+            'logging': {
+                'structured': True,
+                'audit_trail': True,
+                'log_file': 'logs/hacktheweb.log',
+                'audit_file': 'logs/audit.log',
+            },
         }
         
         # Load custom config if provided
