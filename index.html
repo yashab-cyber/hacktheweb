@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="HackTheWeb - An AI-powered, production-ready web application security scanner and penetration testing framework.">
+    <meta name="author" content="Yashab Alam (YashAB Cyber Security)">
+    <title>HackTheWeb - AI-Powered Web Application Security Scanner</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=Outfit:wght@300;400;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Custom Style -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar" id="main-navbar">
+        <div class="nav-container">
+            <a href="#" class="logo">
+                <i class="fa-solid fa-shield-halved logo-icon"></i>
+                <span>HackThe<span class="highlight">Web</span></span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="#features" id="nav-link-features">Features</a></li>
+                <li><a href="#demo" id="nav-link-demo">Interactive Demo</a></li>
+                <li><a href="#installation" id="nav-link-installation">Installation</a></li>
+                <li><a href="#donate" id="nav-link-donate">Donate</a></li>
+                <li><a href="#contact" id="nav-link-contact">Contact</a></li>
+            </ul>
+            <a href="https://github.com/yashab-cyber/hacktheweb" class="btn btn-nav" id="btn-github-nav" target="_blank">
+                <i class="fa-brands fa-github"></i> GitHub
+            </a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="hero">
+        <div class="hero-container">
+            <div class="hero-content">
+                <div class="badge-container">
+                    <span class="badge"><i class="fa-solid fa-robot"></i> AI-Powered Security</span>
+                </div>
+                <h1 class="hero-title">Next-Gen Web <br><span class="gradient-text">Vulnerability Scanner</span></h1>
+                <p class="hero-subtitle">
+                    An asynchronous, rule-based AI penetration testing framework optimized for security professionals. Gather intelligence, perform security audits, and identify vulnerabilities instantly.
+                </p>
+                <div class="hero-actions">
+                    <a href="#demo" class="btn btn-primary" id="hero-btn-demo">
+                        <i class="fa-solid fa-circle-play"></i> Try Demo Scan
+                    </a>
+                    <a href="#installation" class="btn btn-secondary" id="hero-btn-install">
+                        <i class="fa-solid fa-terminal"></i> Get Started
+                    </a>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="cyber-shield">
+                    <div class="shield-ring ring-1"></div>
+                    <div class="shield-ring ring-2"></div>
+                    <div class="shield-ring ring-3"></div>
+                    <i class="fa-solid fa-user-secret shield-icon animate-pulse"></i>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Key Metrics / Highlights -->
+    <section class="metrics">
+        <div class="container metrics-grid">
+            <div class="metric-card" id="metric-scanners">
+                <h3 class="metric-num">15+</h3>
+                <p class="metric-label">Active Scanning Modules</p>
+            </div>
+            <div class="metric-card" id="metric-speed">
+                <h3 class="metric-num">Asynchronous</h3>
+                <p class="metric-label">High-Performance Core</p>
+            </div>
+            <div class="metric-card" id="metric-ai">
+                <h3 class="metric-num">Rule-Based</h3>
+                <p class="metric-label">Intelligent AI Engine</p>
+            </div>
+            <div class="metric-card" id="metric-logging">
+                <h3 class="metric-num">JSON</h3>
+                <p class="metric-label">SIEM Logging & Auditing</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="features">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Comprehensive Vulnerability Detection</h2>
+                <p class="section-subtitle">Armed with 15 advanced scanning techniques mapping to OWASP Top 10 and CWE guidelines.</p>
+            </div>
+            
+            <div class="features-grid">
+                <div class="feature-card" id="feat-xss">
+                    <div class="feat-icon-container"><i class="fa-solid fa-code icon-xss"></i></div>
+                    <h3>Cross-Site Scripting (XSS)</h3>
+                    <p>Detects Reflected, Stored, and DOM-based scripting vectors.</p>
+                </div>
+                <div class="feature-card" id="feat-sqli">
+                    <div class="feat-icon-container"><i class="fa-solid fa-database icon-sqli"></i></div>
+                    <h3>SQL Injection (SQLi)</h3>
+                    <p>Tests for Error-based, Boolean-based, Time-based, and UNION attacks.</p>
+                </div>
+                <div class="feature-card" id="feat-csrf">
+                    <div class="feat-icon-container"><i class="fa-solid fa-user-shield icon-csrf"></i></div>
+                    <h3>Cross-Site Request Forgery</h3>
+                    <p>Performs token validation audits and secure cookie checks.</p>
+                </div>
+                <div class="feature-card" id="feat-ssrf">
+                    <div class="feat-icon-container"><i class="fa-solid fa-network-wired icon-ssrf"></i></div>
+                    <h3>Server-Side Request Forgery</h3>
+                    <p>Maps out vulnerability points capable of internal port probing.</p>
+                </div>
+                <div class="feature-card" id="feat-lfi">
+                    <div class="feat-icon-container"><i class="fa-solid fa-folder-open icon-lfi"></i></div>
+                    <h3>File Inclusion (LFI/RFI)</h3>
+                    <p>Checks parameters for local and remote path disclosure flaws.</p>
+                </div>
+                <div class="feature-card" id="feat-rce">
+                    <div class="feature-card-glow"></div>
+                    <div class="feat-icon-container"><i class="fa-solid fa-terminal icon-rce"></i></div>
+                    <h3>Remote Code Execution (RCE)</h3>
+                    <p>Identifies command injection vectors and code evaluation flows.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive Simulation Demo Section -->
+    <section id="demo" class="demo-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Live Simulator Demo</h2>
+                <p class="section-subtitle">Experience our newly integrated Structured JSON Logging, dynamic fingerprinting, and audit telemetry.</p>
+            </div>
+            
+            <div class="terminal-container">
+                <div class="terminal-header">
+                    <div class="terminal-buttons">
+                        <span class="btn-terminal close"></span>
+                        <span class="btn-terminal minimize"></span>
+                        <span class="btn-terminal maximize"></span>
+                    </div>
+                    <span class="terminal-title">hacktheweb --scan-mode smart</span>
+                </div>
+                
+                <div class="terminal-body" id="scan-terminal">
+                    <div class="terminal-welcome">
+                        <pre class="terminal-ascii">
+██╗  ██╗ █████╗  ██████╗██╗  ██╗████████╗██╗  ██╗███████╗██╗    ██╗███████╗██████╗ 
+██║  ██║██╔══██╗██╔════╝██║ ██╔╝╚══██╔══╝██║  ██║██╔════╝██║    ██║██╔════╝██╔══██╗
+███████║███████║██║     █████╔╝    ██║   ███████║█████╗  ██║ █╗ ██║█████╗  ██████╔╝
+██╔══██║██╔══██║██║     ██╔═██╗    ██║   ██╔══██║██╔══╝  ██║███╗██║██╔══╝  ██╔══██╗
+██║  ██║██║  ██║╚██████╗██║  ██╗   ██║   ██║  ██║███████╗╚███╔███╔╝███████╗██████╔╝
+╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝╚═╝  ╚═╝   ╚═╝   ╚═╝  ╚═╝╚══════╝ ╚══╝╚══╝ ╚══════╝╚═════╝ </pre>
+                        <p class="dim">AI-Powered Web Penetration Testing Tool v1.0.0</p>
+                        <p class="dim">Type target URL below and click Launch Scanner to begin simulation...</p>
+                    </div>
+                    <div id="terminal-output" class="terminal-output"></div>
+                    <div class="terminal-input-line">
+                        <span class="terminal-prompt">$ hacktheweb --target</span>
+                        <input type="text" id="target-input" placeholder="https://example.com" value="https://target-webapp.local">
+                        <button id="btn-run-scan" class="btn btn-terminal-run">Launch Scanner</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="report-view-container" class="report-view-container hidden">
+                <div class="report-panel">
+                    <h3><i class="fa-solid fa-square-poll-vertical"></i> Simulated Scan Report Summary</h3>
+                    <div class="report-stats">
+                        <div class="report-stat-card critical">
+                            <span class="count">1</span>
+                            <span class="label">Critical</span>
+                        </div>
+                        <div class="report-stat-card high">
+                            <span class="count">2</span>
+                            <span class="label">High</span>
+                        </div>
+                        <div class="report-stat-card medium">
+                            <span class="count">3</span>
+                            <span class="label">Medium</span>
+                        </div>
+                        <div class="report-stat-card info">
+                            <span class="count">5</span>
+                            <span class="label">Info / Passive</span>
+                        </div>
+                    </div>
+                    <p class="report-description">
+                        Scan completed in 1.45 seconds. Identified target uses **Nginx** (WebServer), runs **PHP** (via PHPSESSID cookie analysis), and contains client-side **React** components.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Installation & Setup -->
+    <section id="installation" class="installation">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Installation & Get Started</h2>
+                <p class="section-subtitle">Set up HackTheWeb on your local environment in a few commands.</p>
+            </div>
+            
+            <div class="installation-steps">
+                <div class="step-card" id="step-clone">
+                    <span class="step-num">1</span>
+                    <h3>Clone the Repository</h3>
+                    <div class="code-box">
+                        <span class="code-text">git clone https://github.com/yashab-cyber/hacktheweb.git</span>
+                        <button class="btn-copy" onclick="navigator.clipboard.writeText('git clone https://github.com/yashab-cyber/hacktheweb.git')"><i class="fa-regular fa-copy"></i></button>
+                    </div>
+                </div>
+                
+                <div class="step-card" id="step-install">
+                    <span class="step-num">2</span>
+                    <h3>Install Core Dependencies</h3>
+                    <div class="code-box">
+                        <span class="code-text">pip install -r requirements.txt</span>
+                        <button class="btn-copy" onclick="navigator.clipboard.writeText('pip install -r requirements.txt')"><i class="fa-regular fa-copy"></i></button>
+                    </div>
+                </div>
+                
+                <div class="step-card" id="step-scan">
+                    <span class="step-num">3</span>
+                    <h3>Run Your First Scan</h3>
+                    <div class="code-box">
+                        <span class="code-text">python3 hacktheweb.py scan https://example.com</span>
+                        <button class="btn-copy" onclick="navigator.clipboard.writeText('python3 hacktheweb.py scan https://example.com')"><i class="fa-regular fa-copy"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Donation Section -->
+    <section id="donate" class="donate-section">
+        <div class="container text-center">
+            <div class="donate-card">
+                <div class="donate-glow"></div>
+                <h2>💖 Support HackTheWeb Development</h2>
+                <p>
+                    HackTheWeb is open source and maintained by community-driven efforts. If this tool saves you time, helps audits, or supports your security research, consider sponsoring the project.
+                </p>
+                <div class="donate-actions">
+                    <a href="mailto:yashabalam9@gmail.com?subject=HackTheWeb%20Donation%20Inquiry" class="btn btn-primary" id="btn-donate-mail">
+                        <i class="fa-solid fa-envelope"></i> Send Donation Inquiry
+                    </a>
+                </div>
+                <p class="support-note">Donations are managed securely directly via email communication.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer / Contacts -->
+    <footer id="contact" class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <h3>HackThe<span class="highlight">Web</span></h3>
+                    <p>AI-powered security scanning engine tailored for automated application audits.</p>
+                </div>
+                <div class="footer-links-col">
+                    <h4>Direct Contact</h4>
+                    <p><i class="fa-solid fa-envelope"></i> <a href="mailto:yashabalam9@gmail.com">yashabalam9@gmail.com</a></p>
+                    <p><i class="fa-solid fa-envelope"></i> <a href="mailto:yashabalam707@gmail.com">yashabalam707@gmail.com</a></p>
+                </div>
+                <div class="footer-social-col">
+                    <h4>Connect on Socials</h4>
+                    <div class="social-icons">
+                        <a href="https://x.com/Yashab_cyber" target="_blank" aria-label="X (Twitter)"><i class="fa-brands fa-x-twitter"></i></a>
+                        <a href="https://www.linkedin.com/in/yashab-alam" target="_blank" aria-label="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
+                        <a href="https://www.instagram.com/yashabcyber" target="_blank" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="https://www.threads.net/@yashabcyber" target="_blank" aria-label="Threads"><i class="fa-solid fa-at"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom text-center">
+                <p>&copy; 2026 YashAB Cyber Security (Yashab Alam). All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Custom App Logic -->
+    <script src="app.js"></script>
+</body>
+</html>
