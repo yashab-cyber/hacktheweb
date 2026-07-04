@@ -122,8 +122,15 @@ async def test_scanner_scan_execution():
     mock_resp_obj = AsyncMock()
     mock_resp_obj.status = 200
     mock_resp_obj.headers = {'Server': 'nginx', 'Content-Type': 'text/html'}
-    mock_resp_obj.cookies = {}
-    mock_resp_obj.text.return_value = '<html><body><form action="/login"><input name="username" type="text"/></form></body></html>'
+    
+    # Setup mock cookies to test cookie fingerprinting
+    from http.cookies import SimpleCookie
+    cookie_obj = SimpleCookie()
+    cookie_obj['PHPSESSID'] = 'php-sess-id-value'
+    mock_resp_obj.cookies = cookie_obj
+    
+    # Setup mock HTML containing React elements to test DOM fingerprinting
+    mock_resp_obj.text.return_value = '<html><body><div data-reactroot="">React App</div><form action="/login"><input name="username" type="text"/></form></body></html>'
     
     mock_response.__aenter__.return_value = mock_resp_obj
     mock_session.get.return_value = mock_response
@@ -144,6 +151,13 @@ async def test_scanner_scan_execution():
         assert len(recon_data['forms']) == 1
 
         analysis = ai_engine.analyze_target(recon_data)
+        
+        # Verify technology signatures resolved dynamically
+        detected_names = [t['name'].lower() for t in analysis['technology_stack']]
+        assert 'nginx' in detected_names       # From Server header
+        assert 'php' in detected_names         # From PHPSESSID cookie
+        assert 'react' in detected_names       # From HTML content pattern
+        
         assert len(analysis['priority_vulnerabilities']) > 0
 
         # Mock scan responses

@@ -38,8 +38,7 @@ class AIEngine:
         }
         
         # Detect technologies
-        if 'headers' in target_info:
-            analysis['technology_stack'] = self._detect_technologies(target_info['headers'])
+        analysis['technology_stack'] = self._detect_technologies(target_info)
         
         # Identify attack surface
         if 'forms' in target_info:
@@ -62,11 +61,14 @@ class AIEngine:
         
         return analysis
     
-    def _detect_technologies(self, headers: Dict[str, str]) -> List[Dict[str, str]]:
-        """Detect web technologies from headers"""
+    def _detect_technologies(self, target_info: Dict[str, Any]) -> List[Dict[str, Any]]:
+        """Detect web technologies from headers, cookies, and HTML structures"""
         technologies = []
+        headers = target_info.get('headers', {})
+        cookies = target_info.get('cookies', [])
+        html = target_info.get('html_content', '')
         
-        # Technology signatures
+        # Technology signatures mapping
         tech_signatures = {
             'server': {
                 'nginx': r'nginx',
@@ -91,6 +93,7 @@ class AIEngine:
             }
         }
         
+        # 1. Inspect Response Headers
         for header, value in headers.items():
             header_lower = header.lower()
             
@@ -115,8 +118,57 @@ class AIEngine:
                             'version': self._extract_version(value),
                             'confidence': 0.90
                         })
+                        
+        # 2. Inspect Cookie Fingerprints (Advanced)
+        cookie_signatures = {
+            'PHPSESSID': {'name': 'php', 'type': 'language', 'confidence': 0.85},
+            'sessionid': {'name': 'django', 'type': 'framework', 'confidence': 0.80},
+            'csrftoken': {'name': 'django', 'type': 'framework', 'confidence': 0.75},
+            'JSESSIONID': {'name': 'java', 'type': 'language', 'confidence': 0.90},
+            'connect.sid': {'name': 'nodejs', 'type': 'language', 'confidence': 0.85},
+            'laravel_session': {'name': 'laravel', 'type': 'framework', 'confidence': 0.95},
+            '_rails_admin_session': {'name': 'rails', 'type': 'framework', 'confidence': 0.95},
+        }
         
-        return technologies
+        for cookie in cookies:
+            cookie_name = cookie.get('name', '')
+            if cookie_name in cookie_signatures:
+                sig = cookie_signatures[cookie_name]
+                technologies.append({
+                    'type': sig['type'],
+                    'name': sig['name'],
+                    'version': 'unknown',
+                    'confidence': sig['confidence']
+                })
+                
+        # 3. Inspect HTML Content Signatures (Advanced)
+        html_signatures = {
+            'wordpress': (r'wp-content|wp-includes|wp-json', 'framework', 0.95),
+            'laravel': (r'href=".*laravel.*"|csrf-token', 'framework', 0.60),
+            'django': (r'csrfmiddlewaretoken', 'framework', 0.85),
+            'react': (r'data-reactroot|react-dom', 'framework', 0.80),
+            'angular': (r'ng-version|ng-app', 'framework', 0.85),
+            'vue.js': (r'v-cloak|data-v-', 'framework', 0.80),
+        }
+        
+        if html:
+            for tech, (pattern, tech_type, confidence) in html_signatures.items():
+                if re.search(pattern, html, re.IGNORECASE):
+                    technologies.append({
+                        'type': tech_type,
+                        'name': tech,
+                        'version': 'unknown',
+                        'confidence': confidence
+                    })
+        
+        # Deduplicate detected technologies by name, retaining the highest confidence
+        unique_techs = {}
+        for tech in technologies:
+            name = tech['name'].lower()
+            if name not in unique_techs or tech['confidence'] > unique_techs[name]['confidence']:
+                unique_techs[name] = tech
+                
+        return list(unique_techs.values())
     
     def _extract_version(self, text: str) -> str:
         """Extract version number from text"""

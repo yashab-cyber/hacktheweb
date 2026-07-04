@@ -150,6 +150,7 @@ class Scanner:
                     })
                 
                 html_content = await response.text()
+                recon_data['html_content'] = html_content
                 
                 # Parse HTML
                 soup = BeautifulSoup(html_content, 'lxml')
